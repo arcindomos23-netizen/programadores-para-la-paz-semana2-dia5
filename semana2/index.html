@@ -4,22 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Formulario Participa</title>
+  <link real="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
   <main>
     <section class="contenedor">
-      <h1>Formulario Participa</h1>
-
-      <p>
-        Este formulario permite recoger propuestas, ideas o necesidades de la comunidad.
-        La información será usada únicamente con fines de participación y organización comunitaria.
-      </p>
+      <div class="header-card">
+        <h1>Formulario de Participación Comunitaria</h1>
+        <p class="sub">Municipio de Unión Panamericana — Departamento del Chocó</p>
+        <div class="header-divider"></div>
+        <p class="desc">Comparte tus propuestas, ideas o necesidades. Tu voz construye el municipio.</p>
+      </div>
 
       <form>
         <div class="campo">
-          <label for="nombre">Nombre</label>
+          <label for="nombre"><i class="ti ti-user"></i> Nombre y Apellido</label>
           <input 
             type="text" 
             id="nombre" 
@@ -28,15 +29,16 @@
         </div>
 
         <div class="campo">
-          <label for="propuesta">Propuesta o mensaje</label>
+          <label for="propuesta"><i class="ti ti-message"></i> Propuesta o mensaje</label>
           <textarea 
             id="propuesta" 
             name="propuesta" 
-            placeholder="Escribe tu propuesta para la comunidad"></textarea>
+            placeholder="Describe tu propuesta, idea o necesidad para la comunidad.."></textarea>
+            <p class="hint">Sé claro y específico. Toda propuesta es bienvenida.</p>
         </div>
 
         <div class="campo">
-          <label for="contacto">Correo o teléfono de contacto opcional</label>
+          <label for="contacto"><i class="ti ti-phone"></i> Correo o teléfono <span class ="optiona-tag">(opcional)</span></label>
           <input 
             type="text" 
             id="contacto" 
@@ -44,17 +46,37 @@
             placeholder="Este campo es opcional">
         </div>
 
-        <div class="campo">
-          <label>
-            <input type="checkbox" name="consentimiento">
-            Acepto que mi información sea usada únicamente para fines de participación comunitaria.
-          </label>
+        <div class="campo-ckeck">
+            <input type="checkbox" id="consentimiento" name="consentimiento">
+            <span><i class="ti ti-checkbox"></i> Acepto que mi información sea usada únicamente con fines de participación y organización comunitaria, de acuerdo con la política de datos de la Alcaldía de Unión Panamericana.</span>
+
         </div>
 
-        <button type="submit">Enviar participación</button>
+        <button type="button" class="btn-enviar" onclick="enviarFormulario()"></button>
+        <i class="ti ti-send"></i> Enviar participación
+        </button>
+        <div class="success-msg" id="successMsg">
+          <i class="ti ti-circle-check" style="font-size:20px; display:block; margin-bottom:6px;"></i>
+          ¡Gracias por tu participación! Tu propuesta ha sido recibida.<br>
+          La Alcaldía de Unión Panamericana la tendrá en cuenta.
+        </div>
       </form>
     </section>
+    <p class="footer-note">Alcaldía Municipal de Unión Panamericana · Departamento del Chocó</p>
   </main>
+  <script>
+    function enviarFormulario() {
+      const nombre = document.getElementById('nombre').value.trim();
+      const propuesta = document.getElementById('propuesta').value.trim();
+      const consentimiento = document.getElementById('consentimiento').checked;
 
+      if (!nombre) { alert('Por favor escribe tu nombre y apellido.'); return; }
+      if (!propuesta) { alert('Por favor escribe tu propuesta o mensaje.'); return; }
+      if (!consentimiento) { alert('Debes aceptar el uso de tu información para continuar.'); return; }
+
+      document.getElementById('successMsg').style.display = 'block';
+      document.querySelector('.btn-enviar').disabled = true;
+    }
+  </script>
 </body>
 </html>
